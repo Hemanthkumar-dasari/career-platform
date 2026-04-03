@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
-import json
 
 from app.api.deps import get_current_user
 from app.db.database import get_db, SessionLocal
@@ -23,6 +22,7 @@ def start_interview(
         raise HTTPException(status_code=502, detail=f"Database error: {e}")
     return session
 
+
 @router.delete("/{session_id}", status_code=204)
 def delete_interview(
     session_id: int,
@@ -30,7 +30,7 @@ def delete_interview(
     current_user: User = Depends(get_current_user),
 ):
     session = db.query(InterviewSession).filter(
-        InterviewSession.id == session_id, 
+        InterviewSession.id == session_id,
         InterviewSession.user_id == current_user.id
     ).first()
     if not session:
@@ -38,6 +38,7 @@ def delete_interview(
     db.delete(session)
     db.commit()
     return None
+
 
 @router.post("/answer/stream")
 def submit_answer_stream(
@@ -58,25 +59,24 @@ def submit_answer_stream(
             ):
                 full_text += chunk
                 yield chunk
-                
-            # After streaming is done, push user answer and bot response to DB history
+
             db_session = SessionLocal()
             try:
-                # Refresh session inside new db context
-                session = db_session.query(InterviewSession).filter(InterviewSession.id == payload.session_id).first()
-                if session:
-                    history = list(session.messages or [])
+                fresh_session = db_session.query(InterviewSession).filter(
+                    InterviewSession.id == payload.session_id
+                ).first()
+                if fresh_session:
+                    history_new = list(fresh_session.messages or [])
                     if payload.user_answer:
-                        history.append({"role": "user", "content": payload.user_answer})
+                        history_new.append({"role": "user", "content": payload.user_answer})
                     else:
-                        history.append({"role": "user", "content": f"Start the interview on topic: {session.topic}"})
-                        
-                    history.append({"role": "assistant", "content": full_text})
-                    session.messages = history
+                        history_new.append({"role": "user", "content": f"Start the interview on topic: {fresh_session.topic}"})
+                    history_new.append({"role": "assistant", "content": full_text})
+                    fresh_session.messages = history_new
                     db_session.commit()
             finally:
                 db_session.close()
-            
+
         except Exception as e:
             yield f"\n\n**Error during stream**: {str(e)}"
 
@@ -98,26 +98,33 @@ def evaluate_interview_stream(
             for chunk in llm_service.stream_interview_evaluation(history):
                 full_text += chunk
                 yield chunk
-                
+
             db_session = SessionLocal()
             try:
-                session = db_session.query(InterviewSession).filter(InterviewSession.id == session_id).first()
-                if session:
-                    session.evaluation = full_text
+                fresh_session = db_session.query(InterviewSession).filter(
+                    InterviewSession.id == session_id
+                ).first()
+                if fresh_session:
+                    fresh_session.evaluation = full_text
                     db_session.commit()
             finally:
                 db_session.close()
+
         except Exception as e:
             yield f"\n\n**Error during evaluation**: {str(e)}"
 
     return StreamingResponse(generator(), media_type="text/plain")
+
 
 @router.get("/", response_model=list[SessionOut])
 def list_sessions(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    return db.query(InterviewSession).filter(InterviewSession.user_id == current_user.id).all()
+    return db.query(InterviewSession).filter(
+        InterviewSession.user_id == current_user.id
+    ).all()
+
 
 @router.get("/{session_id}", response_model=SessionOut)
 def get_session(
