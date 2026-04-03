@@ -1,0 +1,104 @@
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import toast from 'react-hot-toast'
+import { Sparkles, Loader2 } from 'lucide-react'
+import GoogleLoginButton from '../components/auth/GoogleLoginButton'
+
+export default function Register() {
+  const { register } = useAuth()
+  const navigate = useNavigate()
+  const [form, setForm] = useState({ full_name: '', email: '', password: '' })
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      await register(form.email, form.full_name, form.password)
+      navigate('/dashboard')
+    } catch (err) {
+      let errorMsg = err.response?.data?.detail || 'Registration failed.'
+      if (Array.isArray(errorMsg)) {
+        errorMsg = errorMsg[0].msg || 'Invalid input.'
+      }
+      toast.error(errorMsg)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <Sparkles className="w-8 h-8 text-primary-500" />
+          <span className="text-2xl font-bold text-white">CareerAI</span>
+        </div>
+        <div className="card">
+          <h1 className="text-xl font-bold text-white mb-6">Create your account</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="label">Full Name</label>
+              <input
+                type="text"
+                className="input"
+                placeholder="Jane Doe"
+                value={form.full_name}
+                onChange={(e) => setForm({ ...form, full_name: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <label className="label">Email</label>
+              <input
+                type="email"
+                className="input"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <label className="label">Password</label>
+              <input
+                type="password"
+                className="input"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                minLength={6}
+                required
+              />
+            </div>
+            <button
+            type="submit"
+            disabled={loading}
+            className="w-full btn-primary py-3 rounded-xl font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+          >
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Create account'}
+          </button>
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-surface-border"></div>
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-surface px-2 text-slate-500 font-medium">Or continue with</span>
+            </div>
+          </div>
+
+          <GoogleLoginButton />
+          </form>
+          <p className="text-sm text-slate-400 text-center mt-4">
+            Already have an account?{' '}
+            <Link to="/login" className="text-primary-400 hover:underline">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}

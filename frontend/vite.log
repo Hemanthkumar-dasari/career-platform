@@ -1,0 +1,253 @@
+
+> ai-career-guidance-frontend@1.0.0 dev
+> vite
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m2194[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m8:56:08 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m8:57:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mtailwind.config.js[22m
+[2m8:57:52 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m8:58:36 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/Dashboard.jsx, /src/index.css[22m
+[2m8:59:16 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/LearningPaths.jsx, /src/index.css[22m
+[2m8:59:45 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/ProjectIdeas.jsx, /src/index.css[22m
+[2m9:00:18 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/ResumeAnalyzer.jsx, /src/index.css[22m
+[2m9:00:46 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/InterviewPrep.jsx, /src/index.css[22m
+[2m9:09:01 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m9:10:03 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/Dashboard.jsx, /src/index.css[22m
+[2m9:12:42 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/LearningPaths.jsx, /src/index.css[22m
+[2m9:12:47 PM[22m [36m[1m[vite][22m[39m [32m✨ new dependencies optimized: [33mreact-markdown[32m[39m
+[2m9:12:47 PM[22m [36m[1m[vite][22m[39m [32m✨ optimized dependencies changed. reloading[39m
+[2m9:13:25 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/LearningPaths.jsx, /src/pages/ProjectIdeas.jsx, /src/pages/ResumeAnalyzer.jsx[22m
+[2m9:13:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/ProjectIdeas.jsx, /src/index.css[22m
+[2m9:13:43 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/ProjectIdeas.jsx, /src/index.css[22m
+[2m9:14:21 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/ResumeAnalyzer.jsx, /src/index.css[22m
+[2m9:14:55 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/InterviewPrep.jsx, /src/index.css[22m
+[2m9:20:49 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/Dashboard.jsx, /src/index.css[22m
+[2m9:20:49 PM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "framer-motion" from "src/pages/Dashboard.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/Dasari Hemanth/OneDrive - Aditya Educational Institutions/Desktop/Project/frontend/src/pages/Dashboard.jsx[39m:5:23
+[33m  20 |  import PageWrapper from "../components/layout/PageWrapper";
+  21 |  import { Map, Lightbulb, FileText, MessageSquare, ArrowRight, TrendingUp, Send } from "lucide-react";
+  22 |  import { motion } from "framer-motion";
+     |                          ^
+  23 |  import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+  24 |  import Hero3D from "../components/shared/Hero3D";[39m
+      at TransformPluginContext._formatError (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 7)
+      at async TransformPluginContext.transform (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/Dasari%20Hemanth/OneDrive%20-%20Aditya%20Educational%20Institutions/Desktop/Project/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:20:49 PM[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "@react-three/fiber" from "src/components/shared/Hero3D.jsx". Does the file exist?
+X [ERROR] Could not resolve "../dist/compat/array/sortBy.js"
+
+    node_modules/es-toolkit/compat/sortBy.js:1:25:
+      1 │ module.exports = require('../dist/compat/array/sortBy.js').sortBy;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/function/throttle.js"
+
+    node_modules/es-toolkit/compat/throttle.js:1:25:
+      1 │ ....exports = require('../dist/compat/function/throttle.js').throttle;
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/object/get.js"
+
+    node_modules/es-toolkit/compat/get.js:1:25:
+      1 │ module.exports = require('../dist/compat/object/get.js').get;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/object/omit.js"
+
+    node_modules/es-toolkit/compat/omit.js:1:25:
+      1 │ module.exports = require('../dist/compat/object/omit.js').omit;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/array/uniqBy.js"
+
+    node_modules/es-toolkit/compat/uniqBy.js:1:25:
+      1 │ module.exports = require('../dist/compat/array/uniqBy.js').uniqBy;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/math/range.js"
+
+    node_modules/es-toolkit/compat/range.js:1:25:
+      1 │ module.exports = require('../dist/compat/math/range.js').range;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/math/sumBy.js"
+
+    node_modules/es-toolkit/compat/sumBy.js:1:25:
+      1 │ module.exports = require('../dist/compat/math/sumBy.js').sumBy;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/array/last.js"
+
+    node_modules/es-toolkit/compat/last.js:1:25:
+      1 │ module.exports = require('../dist/compat/array/last.js').last;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/math/maxBy.js"
+
+    node_modules/es-toolkit/compat/maxBy.js:1:25:
+      1 │ module.exports = require('../dist/compat/math/maxBy.js').maxBy;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+X [ERROR] Could not resolve "../dist/compat/math/minBy.js"
+
+    node_modules/es-toolkit/compat/minBy.js:1:25:
+      1 │ module.exports = require('../dist/compat/math/minBy.js').minBy;
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] Could not resolve "../dist/compat/predicate/isPlainObject.js"
+
+    node_modules/es-toolkit/compat/isPlainObject.js:1:25:
+      1 │ ... = require('../dist/compat/predicate/isPlainObject.js').isPlainO...
+        ╵               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[2m9:25:39 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 12 errors:
+node_modules/es-toolkit/compat/get.js:1:25: ERROR: Could not resolve "../dist/compat/object/get.js"
+node_modules/es-toolkit/compat/isPlainObject.js:1:25: ERROR: Could not resolve "../dist/compat/predicate/isPlainObject.js"
+node_modules/es-toolkit/compat/last.js:1:25: ERROR: Could not resolve "../dist/compat/array/last.js"
+node_modules/es-toolkit/compat/maxBy.js:1:25: ERROR: Could not resolve "../dist/compat/math/maxBy.js"
+node_modules/es-toolkit/compat/minBy.js:1:25: ERROR: Could not resolve "../dist/compat/math/minBy.js"
+...
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:26:18 PM[22m [36m[1m[vite][22m[39m [32m✨ optimized dependencies changed. reloading[39m
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:29:36 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:29:37 PM[22m [36m[1m[vite][22m[39m [32m✨ optimized dependencies changed. reloading[39m
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:29:40 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:29:41 PM[22m [36m[1m[vite][22m[39m [32m✨ optimized dependencies changed. reloading[39m
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:29:57 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:34:09 PM[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+[2m9:34:09 PM[22m [36m[1m[vite][22m[39m server restarted.
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:34:13 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:34:31 PM[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+[2m9:34:31 PM[22m [36m[1m[vite][22m[39m server restarted.
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:34:34 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:34:37 PM[22m [36m[1m[vite][22m[39m [32m✨ optimized dependencies changed. reloading[39m
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:34:40 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m9:34:42 PM[22m [36m[1m[vite][22m[39m [32m✨ optimized dependencies changed. reloading[39m
+X [ERROR] Could not resolve "react-is"
+
+    node_modules/recharts/es6/util/ReactUtils.js:3:27:
+      3 │ import { isFragment } from 'react-is';
+        ╵                            ~~~~~~~~~~
+
+  You can mark the path "react-is" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+[2m9:34:46 PM[22m [31m[1m[vite][22m[39m [31merror while updating dependencies:
+Error: Build failed with 1 error:
+node_modules/recharts/es6/util/ReactUtils.js:3:27: ERROR: Could not resolve "react-is"
+    at failureErrorWithLog (C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:945:25
+    at C:\Users\Dasari Hemanth\OneDrive - Aditya Educational Institutions\Desktop\Project\frontend\node_modules\esbuild\lib\main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+[2m10:00:03 PM[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+[2m10:00:03 PM[22m [36m[1m[vite][22m[39m server restarted.
+[2m10:04:23 PM[22m [36m[1m[vite][22m[39m [32m.env changed, restarting server...[39m
+[2m10:04:23 PM[22m [36m[1m[vite][22m[39m server restarted.
+[2m10:10:58 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/Dashboard.jsx, /src/index.css[22m
