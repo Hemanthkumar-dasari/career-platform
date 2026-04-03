@@ -1,24 +1,14 @@
-import MySQLdb
 import os
-from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-load_dotenv()
+# Railway provides DATABASE_URL automatically
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Extract connection info from DATABASE_URL
-# mysql://root:hemanth%40123@localhost:3306/career_platform
-db_user = "root"
-db_password = "hemanth@123"
-db_host = "localhost"
-db_port = 3306
-db_name = "career_platform"
+# Fix for pymysql
+if DATABASE_URL.startswith("mysql://"):
+    DATABASE_URL = DATABASE_URL.replace("mysql://", "mysql+pymysql://")
 
-print(f"Connecting to MySQL to create database '{db_name}'...")
+engine = create_engine(DATABASE_URL)
 
-try:
-    conn = MySQLdb.connect(host=db_host, user=db_user, passwd=db_password, port=db_port)
-    cursor = conn.cursor()
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
-    print(f"Database '{db_name}' created or already exists.")
-    conn.close()
-except Exception as e:
-    print(f"Failed to create database: {str(e)}")
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
