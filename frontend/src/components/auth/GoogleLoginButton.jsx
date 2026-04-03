@@ -28,7 +28,7 @@ export default function GoogleLoginButton() {
         onError={handleError}
         theme="filled_blue"
         shape="pill"
-        width="100%"
+        width="300"
         text="continue_with"
       />
     </div>
