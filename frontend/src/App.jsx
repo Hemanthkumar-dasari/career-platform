@@ -13,6 +13,7 @@ import ResumeAnalyzer from './pages/ResumeAnalyzer'
 import InterviewPrep from './pages/InterviewPrep'
 import History from './pages/History'
 import Profile from './pages/Profile'
+import Chat from './pages/Chat'
 import AuroraBackground from './components/shared/AuroraBackground'
 
 export default function App() {
@@ -53,6 +54,10 @@ export default function App() {
               <Route
                 path="/profile"
                 element={<PrivateRoute><Profile /></PrivateRoute>}
+              />
+              <Route
+                path="/chat"
+                element={<PrivateRoute><Chat /></PrivateRoute>}
               />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

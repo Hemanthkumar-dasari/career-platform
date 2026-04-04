@@ -10,10 +10,12 @@ import {
   Sparkles,
   Clock,
   UserCircle,
+  MessageCircle,
 } from 'lucide-react'
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/chat', label: 'AI Chat', icon: MessageCircle },
   { to: '/learning-paths', label: 'Learning Paths', icon: Map },
   { to: '/project-ideas', label: 'Project Ideas', icon: Lightbulb },
   { to: '/resume-analyzer', label: 'Resume Analyzer', icon: FileText },
