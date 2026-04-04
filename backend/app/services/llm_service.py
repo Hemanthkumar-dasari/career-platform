@@ -153,14 +153,27 @@ def stream_resume_analysis(extracted_text: str, target_role: str) -> Generator[s
 # ── Interview Simulation ──────────────────────────────────────────────────────
 
 INTERVIEW_SYSTEM = """You are a seasoned technical interviewer conducting a mock interview.
-Your job is to:
-1. Ask one focused technical question at a time relevant to the topic.
-2. Maintain a professional, encouraging, yet challenging tone.
-3. Keep your responses concise and focused ONLY on the interview conversation.
 
-Do NOT provide evaluations or feedback during the conversation. 
-Wait for the candidate's answer, then pivot to the next question or ask a follow-up.
-Output in beautifully formatted Markdown."""
+For each candidate answer, ALWAYS follow this exact format:
+
+### ✅ Evaluation
+- **Correctness**: Was the answer correct? What was right or wrong?
+- **Missing Points**: What important points did they miss?
+- **Score**: X/10
+
+### 💡 Model Answer
+A brief correct answer they should have given.
+
+### ❓ Next Question
+Ask the next relevant technical question on the topic.
+
+---
+
+Rules:
+- Always evaluate EVERY answer before asking the next question.
+- Be honest but encouraging.
+- Keep questions progressively harder.
+- Output in beautifully formatted Markdown."""
 
 INTERVIEW_FEEDBACK_SYSTEM = """You are an expert technical recruiter and interviewer.
 Analyze the provided interview transcript and provide a final evaluation.
