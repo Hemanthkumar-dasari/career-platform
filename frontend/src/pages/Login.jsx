@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
-import { Sparkles, Loader2 } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import GoogleLoginButton from '../components/auth/GoogleLoginButton'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 export default function Login() {
   const { login } = useAuth()
@@ -29,7 +31,8 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <PageTransition>
+      <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center gap-2 mb-8">
           <Sparkles className="w-8 h-8 text-primary-500" />
@@ -65,7 +68,8 @@ export default function Login() {
             disabled={loading}
             className="w-full btn-primary py-3 rounded-xl font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Sign in'}
+            {loading && <Loader />}
+            {!loading && 'Sign in'}
           </button>
 
           <div className="relative my-6">
@@ -87,6 +91,7 @@ export default function Login() {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </PageTransition>
   )
 }

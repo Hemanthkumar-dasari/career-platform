@@ -2,9 +2,11 @@ import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PageWrapper from '../components/layout/PageWrapper'
 import { useSession } from '../context/SessionContext'
-import { Clock, Map, FileText, Lightbulb, MessageSquare, ChevronRight, Loader2, Search, Trash2, ArrowUpAz, ArrowDownZa } from 'lucide-react'
+import { Clock, Map, FileText, Lightbulb, MessageSquare, ChevronRight, Search, Trash2, ArrowUpAz, ArrowDownZa } from 'lucide-react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 const TAB_CONFIG = [
   { id: 'paths', label: 'Learning Paths', icon: Map, color: 'text-blue-400', bg: 'bg-blue-500/10', endpoint: '/api/paths' },
@@ -113,7 +115,8 @@ export default function History() {
   }, [data, activeTab, searchQuery, sortOrder])
 
   return (
-    <PageWrapper>
+    <PageTransition>
+      <PageWrapper>
       <div className="max-w-5xl mx-auto pb-12 px-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
           <div className="flex items-center gap-3">
@@ -172,12 +175,8 @@ export default function History() {
 
         {/* History List */}
         <div className="space-y-4">
-          {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 text-slate-500">
-               <Loader2 className="w-10 h-10 animate-spin mb-4 opacity-20" />
-               <p className="animate-pulse">Loading your records...</p>
-            </div>
-          ) : filteredAndSortedItems.length === 0 ? (
+          {loading && <Loader />}
+          {!loading && filteredAndSortedItems.length === 0 ? (
             <div className="card text-center py-20 border-dashed bg-transparent border-surface-border">
               <div className="w-16 h-16 rounded-full bg-surface-card flex items-center justify-center mx-auto mb-4 border border-surface-border">
                 {(() => {
@@ -234,6 +233,7 @@ export default function History() {
           )}
         </div>
       </div>
-    </PageWrapper>
+      </PageWrapper>
+    </PageTransition>
   )
 }

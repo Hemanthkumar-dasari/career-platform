@@ -1,5 +1,6 @@
 import React from 'react';
-import { Bot, User, Loader2 } from 'lucide-react';
+import { Bot, User } from 'lucide-react';
+import Loader from './Loader';
 
 /**
  * ChatMessage
@@ -29,7 +30,7 @@ export default function ChatMessage({ role, content, isLatest = false }) {
             : 'bg-primary-500/10 border-primary-500/20 text-white rounded-tr-sm'
         }`}>
           <div className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
-            {content || (isLatest && isAI ? <Loader2 className="w-4 h-4 animate-spin opacity-50" /> : '')}
+            {content || (isLatest && isAI ? <Loader /> : '')}
           </div>
           
           {/* Subtle Role Label */}

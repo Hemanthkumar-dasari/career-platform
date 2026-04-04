@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import PageWrapper from '../components/layout/PageWrapper'
-import { UserCircle, Mail, Shield, Trash2, Download, LogOut, Loader2, Edit2, Check, X } from 'lucide-react'
+import { UserCircle, Mail, Shield, Trash2, Download, LogOut, Edit2, Check, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 export default function Profile() {
   const { user, logout } = useAuth()
@@ -84,7 +86,8 @@ export default function Profile() {
   }
 
   return (
-    <PageWrapper>
+    <PageTransition>
+      <PageWrapper>
       <div className="max-w-4xl mx-auto space-y-8 pb-12">
         <div className="flex items-center gap-4 mb-2">
            <UserCircle className="w-10 h-10 text-primary-400" />
@@ -120,7 +123,8 @@ export default function Profile() {
                       autoFocus
                     />
                     <button type="submit" disabled={loading} className="p-2 bg-primary-600 rounded-xl text-white hover:bg-primary-500 disabled:opacity-50">
-                      {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Check className="w-5 h-5" />}
+                      {loading && <Loader />}
+                      {!loading && <Check className="w-5 h-5" />}
                     </button>
                     <button type="button" onClick={() => { setIsEditing(false); setFullName(user?.full_name || '') }} className="p-2 bg-slate-700 rounded-xl text-white hover:bg-slate-600">
                       <X className="w-5 h-5" />
@@ -171,7 +175,8 @@ export default function Profile() {
                     disabled={exportLoading}
                     className="btn-secondary whitespace-nowrap flex items-center gap-2"
                   >
-                    {exportLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                    {exportLoading && <Loader />}
+                    {!exportLoading && <Download className="w-4 h-4" />}
                     Export CSV
                   </button>
                 </div>
@@ -198,12 +203,14 @@ export default function Profile() {
                 disabled={deleteLoading}
                 className="w-full py-3 rounded-xl border border-red-500/20 text-red-400 hover:bg-red-500 hover:text-white transition-all font-bold flex items-center justify-center gap-2"
               >
-                {deleteLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Delete Account'}
+                {deleteLoading && <Loader />}
+                {!deleteLoading && 'Delete Account'}
               </button>
             </motion.div>
           </div>
         </div>
       </div>
-    </PageWrapper>
+      </PageWrapper>
+    </PageTransition>
   )
 }

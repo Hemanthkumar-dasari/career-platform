@@ -4,9 +4,11 @@ import { useSession } from '../context/SessionContext'
 import { startInterview } from '../api/interviews' // Assuming this is still used for initialization
 import { consumeStream } from '../utils/useStream'
 import toast from 'react-hot-toast'
-import { MessageSquare, Loader2, Send, Bot, ChevronRight, Sparkles } from 'lucide-react'
+import { MessageSquare, Send, Bot, ChevronRight, Sparkles } from 'lucide-react'
 import ResponseRenderer from '../components/shared/ResponseRenderer'
 import ChatMessage from '../components/shared/ChatMessage'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 export default function InterviewPrep() {
   const { interviewData: interviewSession, setInterviewData: setInterviewSession } = useSession()
@@ -117,7 +119,8 @@ export default function InterviewPrep() {
   }
 
   return (
-    <PageWrapper>
+    <PageTransition>
+      <PageWrapper>
       <div className="max-w-4xl mx-auto flex flex-col h-[calc(100vh-6rem)] relative">
         <div className="flex items-center justify-between mb-6 shrink-0">
           <div className="flex items-center gap-3">
@@ -166,8 +169,8 @@ export default function InterviewPrep() {
                 className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-purple-500/25 shrink-0 flex items-center justify-center gap-2" 
                 disabled={loading}
               >
-                {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-                {loading ? 'Starting...' : 'Start Interview'}
+                {loading && <Loader />}
+                {!loading && 'Start Interview'}
               </button>
             </form>
           </div>
@@ -202,7 +205,7 @@ export default function InterviewPrep() {
                 className="w-14 h-14 bg-purple-600 hover:bg-purple-500 text-white rounded-xl transition-all shadow-lg shadow-purple-500/25 flex items-center justify-center shrink-0"
                 disabled={loading || !answer.trim()}
               >
-                {!loading ? <Send className="w-5 h-5 ml-1" /> : <Loader2 className="w-5 h-5 animate-spin" />}
+                {!loading ? <Send className="w-5 h-5 ml-1" /> : <Loader />}
               </button>
             </form>
 
@@ -220,7 +223,7 @@ export default function InterviewPrep() {
                    
                    {isEvaluating && !evaluation && (
                      <div className="flex items-center gap-3 text-purple-400 mb-6 font-mono text-sm animate-pulse">
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader />
                         Analyzing conversation and generating feedback...
                      </div>
                    )}
@@ -234,6 +237,7 @@ export default function InterviewPrep() {
           </div>
         )}
       </div>
-    </PageWrapper>
+      </PageWrapper>
+    </PageTransition>
   )
 }

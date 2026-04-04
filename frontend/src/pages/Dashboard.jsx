@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import PageWrapper from '../components/layout/PageWrapper'
-import { Map, Lightbulb, FileText, MessageSquare, ArrowRight, TrendingUp, Send, Clock, Loader2 } from 'lucide-react'
+import { Map, Lightbulb, FileText, MessageSquare, ArrowRight, TrendingUp, Send, Clock } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import Hero3D from '../components/shared/Hero3D'
 import axios from 'axios'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 const tools = [
   {
@@ -106,7 +108,8 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <PageWrapper>
+    <PageTransition>
+      <PageWrapper>
       <motion.div 
         className="max-w-7xl mx-auto space-y-12 pb-12 overflow-hidden px-4"
         variants={containerVariants}
@@ -156,7 +159,8 @@ export default function Dashboard() {
                 <tool.icon className={`w-5 h-5 ${tool.iconColor}`} />
               </div>
               <div className="text-2xl font-bold text-white mb-1">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto opacity-20" /> : (stats[tool.id] || 0)}
+                {loading && <Loader />}
+                {!loading && (stats[tool.id] || 0)}
               </div>
               <div className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">{tool.title}</div>
             </motion.div>
@@ -257,6 +261,7 @@ export default function Dashboard() {
           </form>
         </motion.section>
       </motion.div>
-    </PageWrapper>
+      </PageWrapper>
+    </PageTransition>
   )
 }

@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
-import { Sparkles, Loader2 } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import GoogleLoginButton from '../components/auth/GoogleLoginButton'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 export default function Register() {
   const { register } = useAuth()
@@ -39,8 +41,9 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <PageTransition>
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
 
         {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-8">
@@ -108,14 +111,8 @@ export default function Register() {
               disabled={loading}
               className="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-xl font-bold text-white transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:scale-105"
             >
-              {loading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Creating account...
-                </>
-              ) : (
-                'Create account'
-              )}
+              {loading && <Loader />}
+              {!loading && 'Create account'}
             </button>
 
             {/* Divider */}
@@ -145,6 +142,7 @@ export default function Register() {
 
         </div>
       </div>
-    </div>
+      </div>
+    </PageTransition>
   )
 }

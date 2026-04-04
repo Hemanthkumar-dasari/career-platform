@@ -98,3 +98,34 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-surface-border rounded-full hover:bg-slate-700;
 }
+
+/* Glowing buttons */
+.btn-primary, button[type="submit"] {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover, button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.6),
+              0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+/* Card hover glow */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* Input focus glow */
+.input:focus {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4),
+              0 0 20px rgba(99, 102, 241, 0.1);
+  border-color: #6366f1;
+}

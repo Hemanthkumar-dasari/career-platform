@@ -3,8 +3,10 @@ import PageWrapper from '../components/layout/PageWrapper'
 import { useSession } from '../context/SessionContext'
 import { consumeStream } from '../utils/useStream'
 import toast from 'react-hot-toast'
-import { Lightbulb, Loader2 } from 'lucide-react'
+import { Lightbulb } from 'lucide-react'
 import ResponseRenderer from '../components/shared/ResponseRenderer'
+import PageTransition from '../components/shared/PageTransition'
+import Loader from '../components/shared/Loader'
 
 export default function ProjectIdeas() {
   const { projectIdeasData, setProjectIdeasData } = useSession() 
@@ -35,7 +37,8 @@ export default function ProjectIdeas() {
   }
 
   return (
-    <PageWrapper>
+    <PageTransition>
+      <PageWrapper>
       <div className="max-w-4xl mx-auto pb-12">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20">
@@ -77,8 +80,8 @@ export default function ProjectIdeas() {
               className="px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-primary-500/25 flex items-center justify-center gap-2"
               disabled={loading}
             >
-              {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-              {loading ? 'Brainstorming...' : 'Generate Projects'}
+              {loading && <Loader />}
+              {!loading && 'Generate Projects'}
             </button>
           </form>
         </div>
@@ -99,6 +102,7 @@ export default function ProjectIdeas() {
           </div>
         )}
       </div>
-    </PageWrapper>
+      </PageWrapper>
+    </PageTransition>
   )
 }

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Sparkles, Map, Lightbulb, FileText, MessageSquare, ChevronRight, CheckCircle2, ShieldCheck, Globe, Star } from 'lucide-react'
+import PageTransition from '../components/shared/PageTransition'
 
 const features = [
   {
@@ -38,7 +39,8 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-surface flex flex-col selection:bg-primary-500/30 overflow-x-hidden">
+    <PageTransition>
+      <div className="min-h-screen bg-surface flex flex-col selection:bg-primary-500/30 overflow-x-hidden">
       {/* Background Glows */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/10 blur-[120px] rounded-full animate-pulse" />
@@ -128,6 +130,7 @@ export default function Home() {
            </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </PageTransition>
   )
 }
