@@ -131,3 +131,20 @@ class SessionOut(BaseModel):
     evaluation: Optional[str]
 
     model_config = {"from_attributes": True}
+
+
+# ── Chat ──────────────────────────────────────────────────────────────────────
+
+class ChatRequest(BaseModel):
+    session_id: Optional[int] = None
+    message: str
+
+
+class ChatSessionOut(BaseModel):
+    id: int
+    title: str
+    messages: List[Any]
+    created_at: datetime
+    updated_at: Optional[datetime] = None
+
+    model_config = {"from_attributes": True}

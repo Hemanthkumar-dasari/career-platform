@@ -22,6 +22,7 @@ class User(Base):
     resumes = relationship("ResumeAnalysis", back_populates="owner", cascade="all, delete")
     interview_sessions = relationship("InterviewSession", back_populates="owner", cascade="all, delete")
     project_ideas = relationship("ProjectIdea", back_populates="owner", cascade="all, delete")
+    chat_sessions = relationship("ChatSession", back_populates="owner", cascade="all, delete")
 
 
 class ProjectIdea(Base):
@@ -77,3 +78,17 @@ class InterviewSession(Base):
     updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
 
     owner = relationship("User", back_populates="interview_sessions")
+
+
+class ChatSession(Base):
+    __tablename__ = "chat_sessions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    title = Column(String(255), default="New Chat")
+    messages = Column(JSON, default=list)  # [{role, content}]
+    created_at = Column(DateTime, default=utcnow)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
+
+    owner = relationship("User", back_populates="chat_sessions")
+

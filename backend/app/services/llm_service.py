@@ -206,3 +206,40 @@ def stream_interview_turn(topic: str, history: list, user_answer: str = "") -> G
         text = chunk.choices[0].delta.content
         if text:
             yield text
+
+
+# ── General Chat ──────────────────────────────────────────────────────────────
+
+CHAT_SYSTEM = """You are CareerAI — a helpful, friendly AI career assistant.
+
+You specialize in:
+- Career advice, job searching, and professional growth
+- Technical skills, programming, and learning roadmaps
+- Resume writing, interview preparation, and salary negotiation
+- Industry trends, role comparisons, and career transitions
+
+You can also answer general knowledge questions when asked.
+
+Rules:
+- Be concise, practical, and encouraging.
+- Use Markdown formatting for readability (headers, bullets, bold, code blocks).
+- If the user asks something unrelated to career topics, answer helpfully but briefly.
+- Never refuse to help. Be warm, human, and supportive."""
+
+
+def stream_chat_turn(messages: list) -> Generator[str, None, None]:
+    """Multi-turn chat with full conversation history."""
+    client = _get_client()
+    full_messages = [{"role": "system", "content": CHAT_SYSTEM}]
+    full_messages.extend(messages)
+
+    stream = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        max_tokens=2048,
+        messages=full_messages,
+        stream=True,
+    )
+    for chunk in stream:
+        text = chunk.choices[0].delta.content
+        if text:
+            yield text

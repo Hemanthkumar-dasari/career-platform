@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, paths, projects, resumes, interviews, stats
+from app.api import auth, paths, projects, resumes, interviews, stats, chat
 from app.db.database import engine
 from app.db import base  # noqa: F401 – registers all models with metadata
 from app.models import domain  # noqa: F401
@@ -35,6 +35,7 @@ app.include_router(projects.router, prefix="/api/projects", tags=["Project Ideas
 app.include_router(resumes.router, prefix="/api/resumes", tags=["Resume Analyzer"])
 app.include_router(interviews.router, prefix="/api/interviews", tags=["Interview Simulator"])
 app.include_router(stats.router, prefix="/api/stats", tags=["Stats"])
+app.include_router(chat.router, prefix="/api/chat", tags=["Chat"])
 
 
 @app.get("/health", tags=["Health"])
