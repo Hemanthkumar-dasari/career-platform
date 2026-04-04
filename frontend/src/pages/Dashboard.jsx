@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import PageWrapper from '../components/layout/PageWrapper'
 import { Map, Lightbulb, FileText, MessageSquare, ArrowRight, TrendingUp, Send, Clock, Sparkles, Zap } from 'lucide-react'
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, useInView } from 'framer-motion'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import Hero3D from '../components/shared/Hero3D'
 import axios from 'axios'
@@ -184,35 +184,125 @@ function MagneticToolCard({ tool, index }) {
   )
 }
 
-// ─── Pulsing Stat Card ───────────────────────────────────────────────────────
+// ─── Ultra Stat Card (flip + burst + shimmer + conic border) ─────────────────
 
 function StatCard({ end, label, accent, delay }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const [flipped, setFlipped] = useState(false)
+  const [burst, setBurst] = useState(false)
+
+  useEffect(() => {
+    const t = setTimeout(() => setFlipped(true), delay * 1000 + 400)
+    return () => clearTimeout(t)
+  }, [delay])
+
+  useEffect(() => {
+    if (flipped) {
+      const t = setTimeout(() => setBurst(true), 600)
+      return () => clearTimeout(t)
+    }
+  }, [flipped])
+
+  const particles = Array.from({ length: 8 }, (_, i) => ({
+    angle: (i / 8) * 360,
+    dist: 38 + Math.random() * 18,
+    size: 3 + Math.random() * 3,
+  }))
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration: 0.5, type: 'spring', stiffness: 120 }}
-      whileHover={{ scale: 1.04 }}
-      className="relative rounded-2xl p-6 flex flex-col items-center justify-center overflow-hidden text-center"
-      style={{
-        background: `linear-gradient(135deg, ${accent}15 0%, ${accent}05 100%)`,
-        border: `1px solid ${accent}30`,
-        backdropFilter: 'blur(12px)',
-      }}
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6, type: 'spring', stiffness: 100 }}
+      whileHover={{ scale: 1.06, y: -4 }}
+      className="relative rounded-2xl overflow-hidden cursor-default"
+      style={{ perspective: 1000 }}
     >
-      {/* Pulse ring */}
+      {/* ── Rotating conic border ── */}
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{ border: `1px solid ${accent}40` }}
-        animate={{ scale: [1, 1.04, 1], opacity: [0.6, 0, 0.6] }}
-        transition={{ duration: 2.5, repeat: Infinity, delay }}
+        style={{
+          background: `conic-gradient(from 0deg, transparent 0%, ${accent} 20%, transparent 40%, transparent 60%, ${accent} 80%, transparent 100%)`,
+          padding: '1.5px',
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
       />
-      <div className="text-4xl font-extrabold text-white mb-1">
-        <AnimatedCounter end={end || 0} />
-      </div>
-      <div className="text-xs font-medium tracking-wide uppercase" style={{ color: accent }}>
-        {label}
-      </div>
+
+      {/* ── 3D flip card ── */}
+      <motion.div
+        className="relative w-full h-full"
+        style={{ transformStyle: 'preserve-3d' }}
+        animate={{ rotateY: flipped ? 0 : 180 }}
+        initial={{ rotateY: 180 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div
+          className="p-6 flex flex-col items-center justify-center text-center rounded-2xl min-h-[120px]"
+          style={{
+            background: `linear-gradient(135deg, ${accent}18 0%, ${accent}08 100%)`,
+            backfaceVisibility: 'hidden',
+          }}
+        >
+          {/* Shimmer sweep */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none rounded-2xl"
+            style={{
+              background: `linear-gradient(105deg, transparent 30%, ${accent}30 50%, transparent 70%)`,
+              backgroundSize: '200% 100%',
+            }}
+            animate={{ backgroundPosition: ['-100% 0', '200% 0'] }}
+            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1.5, ease: 'easeInOut' }}
+          />
+
+          {/* Particle burst */}
+          <AnimatePresence>
+            {burst && particles.map((p, i) => {
+              const rad = (p.angle * Math.PI) / 180
+              const tx = Math.cos(rad) * p.dist
+              const ty = Math.sin(rad) * p.dist
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-full pointer-events-none"
+                  style={{
+                    width: p.size, height: p.size,
+                    background: accent,
+                    left: '50%', top: '50%',
+                    marginLeft: -p.size / 2, marginTop: -p.size / 2,
+                  }}
+                  initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                  animate={{ x: tx, y: ty, opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.03 }}
+                  onAnimationComplete={() => i === 7 && setBurst(false)}
+                />
+              )
+            })}
+          </AnimatePresence>
+
+          {/* Number */}
+          <motion.div
+            className="text-4xl font-extrabold text-white mb-1 relative z-10 tabular-nums"
+            animate={isInView ? { scale: [1, 1.15, 1] } : {}}
+            transition={{ delay: delay + 0.8, duration: 0.4 }}
+          >
+            <AnimatedCounter end={end || 0} />
+          </motion.div>
+
+          {/* Label */}
+          <div
+            className="text-xs font-semibold uppercase tracking-widest relative z-10"
+            style={{ color: accent }}
+          >
+            {label}
+          </div>
+        </div>
+      </motion.div>
     </motion.div>
   )
 }

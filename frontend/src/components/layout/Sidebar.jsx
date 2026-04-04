@@ -32,7 +32,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="w-64 min-h-screen bg-surface-card border-r border-surface-border flex flex-col">
+    <aside className="w-64 min-h-screen border-r border-white/8 flex flex-col" style={{ background: 'rgba(8,6,18,0.65)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
       <div className="p-6 border-b border-surface-border">
         <div className="flex items-center gap-2">
           <Sparkles className="w-6 h-6 text-primary-500" />
@@ -49,8 +49,8 @@ export default function Sidebar() {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 isActive
-                  ? 'bg-primary-600 text-white'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                  ? 'bg-primary-600/80 text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-white/10'
               }`
             }
           >

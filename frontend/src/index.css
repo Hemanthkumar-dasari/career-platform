@@ -7,7 +7,8 @@
     @apply border-surface-border;
   }
   body {
-    @apply bg-surface text-slate-100;
+    @apply text-slate-100;
+    background: transparent;
   }
 }
 
