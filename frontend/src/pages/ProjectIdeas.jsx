@@ -50,7 +50,7 @@ export default function ProjectIdeas() {
           </div>
         </div>
 
-        <div className="card mb-8 border border-surface-border bg-surface-card/50 backdrop-blur-xl">
+        <div className="glass-card mb-8 border border-surface-border bg-surface-card/50 backdrop-blur-xl">
           <form onSubmit={handleGenerate} className="space-y-6">
             <div>
               <label className="text-sm font-medium text-slate-300 ml-1 mb-2 block">Tech Stack</label>
@@ -88,7 +88,7 @@ export default function ProjectIdeas() {
 
         {/* Live Streaming or Restored Content */}
         {(projectIdeasData || loading) && (
-          <div className="card p-8 border border-surface-border bg-surface-card/60 backdrop-blur-xl animate-slide-up-1 shadow-2xl">
+          <div className="glass-card p-8 border border-surface-border bg-surface-card/60 backdrop-blur-xl animate-slide-up-1 shadow-2xl">
             {loading && !projectIdeasData && (
               <div className="flex items-center gap-3 text-primary-400 mb-6 font-mono text-sm animate-pulse">
                 <span className="w-2 h-2 rounded-full bg-primary-400" />

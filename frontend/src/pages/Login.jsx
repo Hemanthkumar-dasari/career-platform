@@ -38,7 +38,8 @@ export default function Login() {
           <Sparkles className="w-8 h-8 text-primary-500" />
           <span className="text-2xl font-bold text-white">CareerAI</span>
         </div>
-        <div className="card">
+        <div className="glass-card gradient-border">
+          <div className="gradient-border-inner">
           <h1 className="text-xl font-bold text-white mb-6">Sign in to your account</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -89,6 +90,7 @@ export default function Login() {
               Create one
             </Link>
           </p>
+          </div>
         </div>
       </div>
       </div>

@@ -177,7 +177,7 @@ export default function History() {
         <div className="space-y-4">
           {loading && <Loader />}
           {!loading && filteredAndSortedItems.length === 0 ? (
-            <div className="card text-center py-20 border-dashed bg-transparent border-surface-border">
+            <div className="glass-card text-center py-20 border-dashed bg-transparent border-surface-border">
               <div className="w-16 h-16 rounded-full bg-surface-card flex items-center justify-center mx-auto mb-4 border border-surface-border">
                 {(() => {
                   const Icon = TAB_CONFIG.find(t => t.id === activeTab).icon

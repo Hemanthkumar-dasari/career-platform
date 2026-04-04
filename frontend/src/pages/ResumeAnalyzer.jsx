@@ -68,7 +68,8 @@ export default function ResumeAnalyzer() {
           </div>
         </div>
 
-        <div className="card mb-8 border border-surface-border bg-surface-card/50 backdrop-blur-xl">
+        {/* Input Form */}
+        <div className="glass-card mb-8 border border-surface-border bg-surface-card/50 backdrop-blur-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div
               onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
@@ -121,7 +122,7 @@ export default function ResumeAnalyzer() {
 
         {/* Live Streaming or Restoring Content */}
         {(resumeData || loading) && (
-          <div className="card p-8 border border-surface-border bg-surface-card/60 backdrop-blur-xl animate-slide-up-1 shadow-2xl">
+          <div className="glass-card p-8 border border-surface-border bg-surface-card/60 backdrop-blur-xl animate-slide-up-1 shadow-2xl">
             {loading && !resumeData && (
               <div className="flex items-center gap-3 text-primary-400 mb-6 font-mono text-sm animate-pulse">
                 <span className="w-2 h-2 rounded-full bg-green-400" />

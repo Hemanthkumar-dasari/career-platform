@@ -6,6 +6,7 @@ import { Sparkles } from 'lucide-react'
 import GoogleLoginButton from '../components/auth/GoogleLoginButton'
 import PageTransition from '../components/shared/PageTransition'
 import Loader from '../components/shared/Loader'
+import SuccessConfetti from '../components/shared/SuccessConfetti'
 
 export default function Register() {
   const { register } = useAuth()
@@ -18,6 +19,7 @@ export default function Register() {
   })
 
   const [loading, setLoading] = useState(false)
+  const [registered, setRegistered] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,8 +29,9 @@ export default function Register() {
 
     try {
       await register(form.email, form.full_name, form.password)
+      setRegistered(true)
       toast.success("Account created successfully!")
-      navigate('/dashboard')
+      setTimeout(() => navigate('/dashboard'), 3000)
     } catch (err) {
       let errorMsg = err.response?.data?.detail || 'Registration failed.'
       if (Array.isArray(errorMsg)) {
@@ -42,6 +45,7 @@ export default function Register() {
 
   return (
     <PageTransition>
+      <SuccessConfetti trigger={registered} />
       <div className="min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-md">
 
@@ -52,7 +56,8 @@ export default function Register() {
         </div>
 
         {/* Card */}
-        <div className="card">
+        <div className="glass-card gradient-border">
+          <div className="gradient-border-inner">
           <h1 className="text-xl font-bold text-white mb-6">
             Create your account
           </h1>
@@ -139,7 +144,7 @@ export default function Register() {
               Sign in
             </Link>
           </p>
-
+          </div>
         </div>
       </div>
       </div>

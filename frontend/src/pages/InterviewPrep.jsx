@@ -9,6 +9,7 @@ import ResponseRenderer from '../components/shared/ResponseRenderer'
 import ChatMessage from '../components/shared/ChatMessage'
 import PageTransition from '../components/shared/PageTransition'
 import Loader from '../components/shared/Loader'
+import SuccessConfetti from '../components/shared/SuccessConfetti'
 
 export default function InterviewPrep() {
   const { interviewData: interviewSession, setInterviewData: setInterviewSession } = useSession()
@@ -17,6 +18,7 @@ export default function InterviewPrep() {
   const [loading, setLoading] = useState(false)
   const [isEvaluating, setIsEvaluating] = useState(false)
   const [evaluation, setEvaluation] = useState('')
+  const [evaluationComplete, setEvaluationComplete] = useState(false)
   const bottomRef = useRef()
 
   const messages = interviewSession?.messages || []
@@ -95,6 +97,7 @@ export default function InterviewPrep() {
     setTopic('')
     setEvaluation('')
     setIsEvaluating(false)
+    setEvaluationComplete(false)
   }
 
   const handleEndAndEvaluate = async () => {
@@ -111,6 +114,7 @@ export default function InterviewPrep() {
         { method: 'POST' },
         (chunk) => setEvaluation(prev => (prev + chunk))
       )
+      setEvaluationComplete(true)
     } catch (err) {
       toast.error(err.message || 'Evaluation failed.')
     } finally {
@@ -120,6 +124,7 @@ export default function InterviewPrep() {
 
   return (
     <PageTransition>
+      <SuccessConfetti trigger={evaluationComplete} />
       <PageWrapper>
       <div className="max-w-4xl mx-auto flex flex-col h-[calc(100vh-6rem)] relative">
         <div className="flex items-center justify-between mb-6 shrink-0">
@@ -151,7 +156,7 @@ export default function InterviewPrep() {
         </div>
 
         {!started ? (
-          <div className="card border border-surface-border bg-surface-card/50 backdrop-blur-xl animate-fade-in">
+          <div className="glass-card border border-surface-border bg-surface-card/50 backdrop-blur-xl animate-fade-in">
             <p className="text-slate-300 mb-6">
               Choose a topic. The AI will ask you questions one by one and evaluate your answers.
             </p>
@@ -212,7 +217,7 @@ export default function InterviewPrep() {
             {/* Evaluation Result Area */}
             {(evaluation || isEvaluating) && (
               <div className="mt-8 mb-12 animate-slide-up-1">
-                <div className="card p-8 border border-purple-500/30 bg-surface-card/80 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
+                <div className="glass-card p-8 border border-purple-500/30 bg-surface-card/80 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
                    <div className="absolute top-0 right-0 p-4 opacity-10">
                       <MessageSquare className="w-24 h-24" />
                    </div>

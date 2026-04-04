@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Sparkles, Map, Lightbulb, FileText, MessageSquare, ChevronRight, CheckCircle2, ShieldCheck, Globe, Star } from 'lucide-react'
 import PageTransition from '../components/shared/PageTransition'
+import TypewriterText from '../components/shared/TypewriterText'
 
 const features = [
   {
@@ -69,6 +70,10 @@ export default function Home() {
         <div className="inline-flex items-center gap-2 bg-primary-500/10 border border-primary-500/20 text-primary-400 text-[10px] uppercase tracking-[0.2em] font-bold px-4 py-1.5 rounded-full mb-8 animate-fade-in">
           <Star className="w-3 h-3 fill-primary-400" /> 
           The Future of Professional Growth
+        </div>
+        
+        <div className="mb-6 h-12 flex items-center justify-center">
+          <TypewriterText />
         </div>
         
         <h1 className="text-5xl sm:text-7xl font-bold text-white mb-8 max-w-4xl tracking-tight leading-[1.1] animate-slide-up">
