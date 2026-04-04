@@ -32,7 +32,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="w-64 min-h-screen border-r border-white/8 flex flex-col" style={{ background: 'rgba(8,6,18,0.65)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
+    <aside className="fixed top-0 left-0 h-screen w-64 border-r border-white/8 flex flex-col z-20" style={{ background: 'rgba(8,6,18,0.65)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
       <div className="p-6 border-b border-surface-border">
         <div className="flex items-center gap-2">
           <Sparkles className="w-6 h-6 text-primary-500" />

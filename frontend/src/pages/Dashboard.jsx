@@ -184,112 +184,64 @@ function MagneticToolCard({ tool, index }) {
   )
 }
 
-// ─── Ultra Stat Card (flip + burst + shimmer + conic border) ─────────────────
+// ─── Stat Card (60fps — flip reveal + hover glow + shimmer) ──────────────────
 
 function StatCard({ end, label, accent, delay }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   const [flipped, setFlipped] = useState(false)
-  const [burst, setBurst] = useState(false)
 
   useEffect(() => {
-    const t = setTimeout(() => setFlipped(true), delay * 1000 + 400)
+    const t = setTimeout(() => setFlipped(true), delay * 1000 + 300)
     return () => clearTimeout(t)
   }, [delay])
-
-  useEffect(() => {
-    if (flipped) {
-      const t = setTimeout(() => setBurst(true), 600)
-      return () => clearTimeout(t)
-    }
-  }, [flipped])
-
-  const particles = Array.from({ length: 8 }, (_, i) => ({
-    angle: (i / 8) * 360,
-    dist: 38 + Math.random() * 18,
-    size: 3 + Math.random() * 3,
-  }))
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.6, type: 'spring', stiffness: 100 }}
-      whileHover={{ scale: 1.06, y: -4 }}
+      transition={{ delay, duration: 0.55, type: 'spring', stiffness: 110, damping: 18 }}
+      whileHover={{
+        scale: 1.05,
+        y: -4,
+        boxShadow: `0 0 28px ${accent}55, 0 0 8px ${accent}33`,
+      }}
       className="relative rounded-2xl overflow-hidden cursor-default"
-      style={{ perspective: 1000 }}
+      style={{ perspective: 800 }}
     >
-      {/* ── Rotating conic border ── */}
+      {/* 3D flip reveal */}
       <motion.div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          background: `conic-gradient(from 0deg, transparent 0%, ${accent} 20%, transparent 40%, transparent 60%, ${accent} 80%, transparent 100%)`,
-          padding: '1.5px',
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-      />
-
-      {/* ── 3D flip card ── */}
-      <motion.div
-        className="relative w-full h-full"
         style={{ transformStyle: 'preserve-3d' }}
         animate={{ rotateY: flipped ? 0 : 180 }}
         initial={{ rotateY: 180 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className="p-6 flex flex-col items-center justify-center text-center rounded-2xl min-h-[120px]"
+          className="p-6 flex flex-col items-center justify-center text-center rounded-2xl min-h-[120px] relative overflow-hidden"
           style={{
             background: `linear-gradient(135deg, ${accent}18 0%, ${accent}08 100%)`,
+            border: `1px solid ${accent}28`,
+            backdropFilter: 'blur(12px)',
             backfaceVisibility: 'hidden',
           }}
         >
-          {/* Shimmer sweep */}
+          {/* Shimmer sweep — single framer-motion pass, GPU backgroundPosition */}
           <motion.div
             className="absolute inset-0 pointer-events-none rounded-2xl"
             style={{
-              background: `linear-gradient(105deg, transparent 30%, ${accent}30 50%, transparent 70%)`,
-              backgroundSize: '200% 100%',
+              background: `linear-gradient(105deg, transparent 35%, ${accent}28 50%, transparent 65%)`,
+              backgroundSize: '250% 100%',
             }}
-            animate={{ backgroundPosition: ['-100% 0', '200% 0'] }}
-            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1.5, ease: 'easeInOut' }}
+            animate={{ backgroundPosition: ['-100% 0', '210% 0'] }}
+            transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 2, ease: 'easeInOut' }}
           />
-
-          {/* Particle burst */}
-          <AnimatePresence>
-            {burst && particles.map((p, i) => {
-              const rad = (p.angle * Math.PI) / 180
-              const tx = Math.cos(rad) * p.dist
-              const ty = Math.sin(rad) * p.dist
-              return (
-                <motion.div
-                  key={i}
-                  className="absolute rounded-full pointer-events-none"
-                  style={{
-                    width: p.size, height: p.size,
-                    background: accent,
-                    left: '50%', top: '50%',
-                    marginLeft: -p.size / 2, marginTop: -p.size / 2,
-                  }}
-                  initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                  animate={{ x: tx, y: ty, opacity: 0, scale: 0 }}
-                  transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.03 }}
-                  onAnimationComplete={() => i === 7 && setBurst(false)}
-                />
-              )
-            })}
-          </AnimatePresence>
 
           {/* Number */}
           <motion.div
             className="text-4xl font-extrabold text-white mb-1 relative z-10 tabular-nums"
-            animate={isInView ? { scale: [1, 1.15, 1] } : {}}
-            transition={{ delay: delay + 0.8, duration: 0.4 }}
+            animate={isInView ? { scale: [1, 1.12, 1] } : {}}
+            transition={{ delay: delay + 0.7, duration: 0.35 }}
           >
             <AnimatedCounter end={end || 0} />
           </motion.div>
@@ -306,6 +258,7 @@ function StatCard({ end, label, accent, delay }) {
     </motion.div>
   )
 }
+
 
 // ─── Typewriter Greeting ─────────────────────────────────────────────────────
 
