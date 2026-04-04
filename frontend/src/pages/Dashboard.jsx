@@ -360,12 +360,12 @@ export default function Dashboard() {
             />
 
             {/* Text side */}
-            <div className="relative z-10 w-full lg:w-1/2 p-8 sm:p-14 flex flex-col justify-center">
+            <div className="relative z-10 w-full lg:w-1/2 p-8 sm:p-10 flex flex-col justify-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="flex items-center gap-2 mb-6"
+                className="flex items-center gap-2 mb-4"
               >
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -380,7 +380,7 @@ export default function Dashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.35, duration: 0.7 }}
-                className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight"
+                className="text-4xl sm:text-5xl font-extrabold text-white mb-3 leading-tight"
               >
                 <TypewriterGreeting name={firstName} />
               </motion.h1>
@@ -389,7 +389,7 @@ export default function Dashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.55, duration: 0.7 }}
-                className="text-slate-400 text-base mb-10 max-w-md leading-relaxed"
+                className="text-slate-400 text-sm mb-8 max-w-sm leading-relaxed"
               >
                 Your AI co-pilot is ready — analyze your resume, chart a learning path, and simulate real interviews.
               </motion.p>
@@ -398,13 +398,13 @@ export default function Dashboard() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.75, duration: 0.6 }}
-                className="flex flex-wrap gap-4"
+                className="flex flex-wrap gap-3"
               >
                 <Link to="/learning-paths">
                   <motion.button
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-8 py-3 bg-white text-gray-900 font-bold rounded-xl flex items-center gap-2 shadow-lg shadow-white/10 transition-colors hover:bg-slate-100"
+                    className="px-7 py-2.5 bg-white text-gray-900 font-bold rounded-xl flex items-center gap-2 shadow-lg shadow-white/10 transition-colors hover:bg-slate-100 text-sm"
                   >
                     <Zap className="w-4 h-4" /> Get Started
                   </motion.button>
@@ -413,7 +413,7 @@ export default function Dashboard() {
                   <motion.button
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-8 py-3 border border-white/15 text-white font-medium rounded-xl flex items-center gap-2 backdrop-blur-md hover:bg-white/5 transition-all"
+                    className="px-7 py-2.5 border border-white/15 text-white font-medium rounded-xl flex items-center gap-2 backdrop-blur-md hover:bg-white/5 transition-all text-sm"
                   >
                     <Clock className="w-4 h-4" /> View History
                   </motion.button>
@@ -421,8 +421,8 @@ export default function Dashboard() {
               </motion.div>
             </div>
 
-            {/* 3D side */}
-            <div className="relative w-full lg:w-1/2 h-[320px] lg:h-auto border-t lg:border-t-0 lg:border-l border-white/8">
+            {/* Image side — fills right half with no border/gap */}
+            <div className="relative w-full lg:w-1/2 h-[320px] lg:h-auto overflow-hidden">
               <Hero3D />
             </div>
           </motion.section>
