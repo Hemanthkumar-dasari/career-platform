@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
+import io
 
 from app.api.deps import get_current_user
+from app.core.validators import validate_file_size
 from app.db.database import get_db, SessionLocal
 from app.models.domain import User, ResumeAnalysis
 from app.schemas.schemas import ResumeOut
@@ -18,10 +20,22 @@ def analyze_resume_stream(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    if not file.filename.endswith(".pdf"):
+    # ── Input validation ──────────────────────────────────────────────────
+    if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
-        
-    extracted_text = resume_parser.extract_text(file.file)
+
+    target_role = target_role.strip()
+    if not target_role or len(target_role) > 200:
+        raise HTTPException(
+            status_code=422,
+            detail="target_role must be between 1 and 200 characters."
+        )
+
+    # Read into memory once so we can validate size before processing
+    file_bytes = file.file.read()
+    validate_file_size(file_bytes)  # raises HTTP 413 if > 5 MB
+
+    extracted_text = resume_parser.extract_text(io.BytesIO(file_bytes))
 
     def generator():
         full_text = ""
