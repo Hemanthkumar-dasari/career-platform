@@ -18,7 +18,7 @@ router = APIRouter()
 
 
 @router.post("/google", response_model=TokenOut)
-@limiter.limit("5/15minutes")
+@limiter.limit("20/minute")
 def google_login(request: Request, payload: GoogleLoginRequest, db: Session = Depends(get_db)):
     try:
         id_info = id_token.verify_oauth2_token(
@@ -98,7 +98,7 @@ def export_data(
 
 
 @router.post("/register", response_model=TokenOut, status_code=status.HTTP_201_CREATED)
-@limiter.limit("5/15minutes")
+@limiter.limit("20/minute")
 def register(request: Request, payload: UserRegister, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == payload.email).first()
     if existing:
@@ -116,7 +116,7 @@ def register(request: Request, payload: UserRegister, db: Session = Depends(get_
 
 
 @router.post("/login", response_model=TokenOut)
-@limiter.limit("5/15minutes")
+@limiter.limit("20/minute")
 def login(request: Request, payload: UserLogin, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == payload.email).first()
     if not user or not verify_password(payload.password, user.hashed_password):
