@@ -9,6 +9,7 @@ import Hero3D from '../components/shared/Hero3D'
 import axios from 'axios'
 import PageTransition from '../components/shared/PageTransition'
 import AnimatedCounter from '../components/shared/AnimatedCounter'
+import { toast } from 'react-hot-toast'
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
@@ -299,6 +300,36 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const firstName = user?.full_name?.split(' ')[0] || 'Guest'
 
+  const [supportName, setSupportName] = useState('')
+  const [supportEmail, setSupportEmail] = useState('')
+  const [supportMessage, setSupportMessage] = useState('')
+  const [isSending, setIsSending] = useState(false)
+
+  const handleSupportSubmit = async () => {
+    if (!supportEmail || !supportMessage) {
+      toast.error('Please enter your email and message.')
+      return
+    }
+    setIsSending(true)
+    try {
+      const api = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      await axios.post(`${api}/api/support/`, {
+        name: supportName,
+        email: supportEmail,
+        message: supportMessage
+      })
+      toast.success('Message sent successfully!')
+      setSupportName('')
+      setSupportEmail('')
+      setSupportMessage('')
+    } catch (err) {
+      console.error('Support error:', err)
+      toast.error('Failed to send message. Please try again.')
+    } finally {
+      setIsSending(false)
+    }
+  }
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -587,38 +618,44 @@ export default function Dashboard() {
 
             <div className="max-w-2xl mx-auto space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {['Name', 'Email'].map((ph) => (
-                  <motion.input
-                    key={ph}
-                    type={ph === 'Email' ? 'email' : 'text'}
-                    placeholder={ph}
-                    whileFocus={{ borderColor: 'rgba(99,102,241,0.7)', boxShadow: '0 0 0 3px rgba(99,102,241,0.1)' }}
-                    className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm outline-none transition-all"
-                    style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.09)',
-                    }}
-                  />
-                ))}
+                <motion.input
+                  type="text"
+                  placeholder="Name"
+                  value={supportName}
+                  onChange={(e) => setSupportName(e.target.value)}
+                  whileFocus={{ borderColor: 'rgba(99,102,241,0.7)', boxShadow: '0 0 0 3px rgba(99,102,241,0.1)' }}
+                  className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' }}
+                />
+                <motion.input
+                  type="email"
+                  placeholder="Email"
+                  value={supportEmail}
+                  onChange={(e) => setSupportEmail(e.target.value)}
+                  whileFocus={{ borderColor: 'rgba(99,102,241,0.7)', boxShadow: '0 0 0 3px rgba(99,102,241,0.1)' }}
+                  className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' }}
+                />
               </div>
               <motion.textarea
                 rows={4}
                 placeholder="Message"
+                value={supportMessage}
+                onChange={(e) => setSupportMessage(e.target.value)}
                 whileFocus={{ borderColor: 'rgba(99,102,241,0.7)', boxShadow: '0 0 0 3px rgba(99,102,241,0.1)' }}
                 className="w-full rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm outline-none resize-none transition-all"
-                style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.09)',
-                }}
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' }}
               />
               <div className="flex justify-end">
                 <motion.button
-                  whileHover={{ scale: 1.03, boxShadow: '0 0 20px rgba(99,102,241,0.35)' }}
-                  whileTap={{ scale: 0.97 }}
-                  className="px-8 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 transition-all"
+                  onClick={handleSupportSubmit}
+                  disabled={isSending}
+                  whileHover={!isSending ? { scale: 1.03, boxShadow: '0 0 20px rgba(99,102,241,0.35)' } : {}}
+                  whileTap={!isSending ? { scale: 0.97 } : {}}
+                  className={`px-8 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 transition-all ${isSending ? 'opacity-70 cursor-not-allowed' : ''}`}
                   style={{ background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)' }}
                 >
-                  <Send className="w-4 h-4" /> Send Message
+                  <Send className="w-4 h-4" /> {isSending ? 'Sending...' : 'Send Message'}
                 </motion.button>
               </div>
             </div>

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from app.api import auth, paths, projects, resumes, interviews, stats, chat
+from app.api import auth, paths, projects, resumes, interviews, stats, chat, support
 from app.core.config import settings
 from app.core.rate_limiter import limiter
 from app.db.database import engine
@@ -41,6 +41,7 @@ app.include_router(resumes.router,    prefix="/api/resumes",    tags=["Resume An
 app.include_router(interviews.router, prefix="/api/interviews", tags=["Interview Simulator"])
 app.include_router(stats.router,      prefix="/api/stats",      tags=["Stats"])
 app.include_router(chat.router,       prefix="/api/chat",       tags=["Chat"])
+app.include_router(support.router,    prefix="/api/support",    tags=["Support"])
 
 
 @app.get("/health", tags=["Health"])

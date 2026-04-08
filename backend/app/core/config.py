@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     # ── AI ────────────────────────────────────────────────────────────────────
     GROQ_API_KEY: str = ""
 
+    # ── SMTP Email (Support) ──────────────────────────────────────────────────
+    SMTP_EMAIL: str = ""
+    SMTP_PASSWORD: str = ""
+
     # ── Google OAuth ──────────────────────────────────────────────────────────
     GOOGLE_CLIENT_ID: str = ""
 
